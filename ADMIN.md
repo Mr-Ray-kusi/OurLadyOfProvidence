@@ -38,7 +38,38 @@ Passwords are stored hashed in the database after first run.
 
 ---
 
-## 2. Production: point subdomain at the same app
+## 2. Production on Vercel (+ Railway Postgres)
+
+The app is ready for Vercel serverless. **Database stays on Railway.** Uploads use **Vercel Blob**.
+
+### A. Railway (already done)
+Keep Postgres online. Use **`DATABASE_PUBLIC_URL`** as `DATABASE_URL` in Vercel (public proxy host).
+
+### B. Vercel project
+1. Import GitHub repo `OurLadyOfProvidence` at [vercel.com/new](https://vercel.com/new).
+2. Framework preset: **Other**.
+3. Add a **Blob** store: Project → Storage → Create → Blob (this sets `BLOB_READ_WRITE_TOKEN`).
+4. Environment variables (Production + Preview):
+
+   | Name | Value |
+   |------|--------|
+   | `DATABASE_URL` | Railway `DATABASE_PUBLIC_URL` |
+   | `JWT_SECRET` | Long random secret |
+   | `BLOB_READ_WRITE_TOKEN` | From Vercel Blob (auto if store linked) |
+
+5. Deploy. Check `https://YOUR-APP.vercel.app/api/health` — should show `"database":"postgres"` and `"uploads":"vercel-blob"`.
+
+### C. Custom domains
+1. Vercel → Domains → add `olpsec.edu.gh` and `admin.olpsec.edu.gh` (same project).
+2. Point DNS as Vercel shows (usually CNAME to `cname.vercel-dns.com`).
+3. Admin works only on the `admin.*` hostname (same as local `admin.localhost`).
+
+### D. Local without Blob
+Leave `BLOB_READ_WRITE_TOKEN` empty; files save under `server/uploads/`.
+
+---
+
+## 3. Production: other hosts (Railway / VPS)
 
 1. Deploy this project on a VPS / Node host (Railway, Render, DigitalOcean, etc.).
 2. In DNS for your domain, add:
@@ -54,15 +85,18 @@ Passwords are stored hashed in the database after first run.
    ```bash
    PORT=3080
    JWT_SECRET=a-long-random-secret
+   DATABASE_URL=postgresql://...   # Railway internal or public URL
    ```
 
 5. Run `npm start` (or use PM2 / systemd).
+
+Optional: set `BLOB_READ_WRITE_TOKEN` on Railway too if you want Blob uploads there; otherwise local disk / a volume under `server/uploads/`.
 
 Both hostnames hit the **same** Node process. The server detects `admin.*` and serves the dashboard; everything else gets the public site. Requests to `/admin` on the **public** hostname return 404 on purpose.
 
 ---
 
-## 3. What each role can do
+## 4. What each role can do
 
 **Secretary & Admin**
 
@@ -81,7 +115,7 @@ Edits save to the database and appear on the public site via `/api/content`.
 
 ---
 
-## 4. Security checklist
+## 5. Security checklist
 
 - Change default passwords before going live  
 - Set a strong `JWT_SECRET`  
@@ -92,15 +126,18 @@ Edits save to the database and appear on the public site via `/api/content`.
 
 ---
 
-## 5. Project layout
+## 6. Project layout
 
 ```
 OLP/
+  api/index.js                        → Vercel serverless entry
+  vercel.json                         → route all traffic to Express
   index.html, styles.css, script.js   → public site
   admin/                              → staff UI (admin subdomain only)
-  server/index.js                     → Express API + host routing
-  server/db.js                        → Postgres (Railway) or SQLite fallback
-  .env                                → DATABASE_URL, JWT_SECRET, PORT
-  server/data/olpsec.db               → SQLite fallback (if no Railway URL)
-  server/uploads/                     → BECE + prefect photos
+  server/index.js                     → Express API + host routing (exported for Vercel)
+  server/db.js                        → Postgres (Railway) or SQLite fallback (local)
+  server/storage.js                   → Vercel Blob or local disk uploads
+  .env                                → secrets (not committed)
+  .env.example                        → variable template
+  server/uploads/                     → local BECE + prefect photos (when not using Blob)
 ```

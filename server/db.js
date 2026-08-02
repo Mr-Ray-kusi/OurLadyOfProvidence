@@ -646,6 +646,7 @@ async function bootstrapPostgres(pool) {
 async function initDb() {
   if (ready) return backend;
 
+  const onVercel = Boolean(process.env.VERCEL);
   const databaseUrl = resolveDatabaseUrl();
   if (databaseUrl) {
     try {
@@ -654,8 +655,9 @@ async function initDb() {
         ssl: databaseUrl.includes("localhost")
           ? false
           : { rejectUnauthorized: false },
-        max: 5,
-        connectionTimeoutMillis: 15000
+        max: onVercel ? 1 : 5,
+        connectionTimeoutMillis: 15000,
+        idleTimeoutMillis: onVercel ? 5000 : 30000
       });
       await pgPool.query("SELECT 1");
       await ensurePostgresSchema(pgPool);
@@ -665,6 +667,12 @@ async function initDb() {
       console.log("Database: Railway Postgres connected");
       return backend;
     } catch (err) {
+      if (onVercel) {
+        throw new Error(
+          "Postgres connection failed on Vercel. Check DATABASE_URL (use Railway DATABASE_PUBLIC_URL). " +
+            err.message
+        );
+      }
       console.warn(
         "DATABASE_URL set but Postgres connection failed; falling back to SQLite."
       );
@@ -681,6 +689,12 @@ async function initDb() {
   } else if (String(process.env.DATABASE_URL || "").trim()) {
     console.warn(
       "DATABASE_URL is set but invalid (missing host). Use Railway DATABASE_PUBLIC_URL for local development."
+    );
+  }
+
+  if (onVercel) {
+    throw new Error(
+      "DATABASE_URL is required on Vercel (Railway Postgres public URL). SQLite cannot be used in serverless."
     );
   }
 

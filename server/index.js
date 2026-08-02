@@ -7,6 +7,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const { initDb, readDb, writeDb, verifyPassword, hashPassword, getDbBackend } = require("./db");
+const { saveUpload, useBlobStorage } = require("./storage");
 
 function uuidv4() {
   return crypto.randomUUID();
@@ -25,6 +26,7 @@ const PREFECT_DIR = path.join(UPLOADS, "prefects");
 });
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -82,45 +84,43 @@ function staffOnly(req, res, next) {
   next();
 }
 
-/* ---------- Multer ---------- */
-const beceUpload = multer({
-  storage: multer.diskStorage({
-    destination: (_req, _file, cb) => cb(null, BECE_DIR),
-    filename: (_req, file, cb) => {
-      const ext = path.extname(file.originalname).toLowerCase() || ".pdf";
-      cb(null, `${Date.now()}-${uuidv4()}${ext}`);
-    }
-  }),
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: (_req, file, cb) => {
-    const ok =
-      /pdf|jpeg|jpg|png/i.test(file.mimetype) ||
-      /\.(pdf|jpe?g|png)$/i.test(file.originalname);
-    cb(ok ? null : new Error("Only PDF, JPG, or PNG allowed"), ok);
-  }
+/* ---------- Multer (memory → Vercel Blob or local disk via storage.js) ---------- */
+const uploadMemory = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 }
 });
 
-const prefectUpload = multer({
-  storage: multer.diskStorage({
-    destination: (_req, _file, cb) => cb(null, PREFECT_DIR),
-    filename: (_req, file, cb) => {
-      const ext = path.extname(file.originalname).toLowerCase() || ".jpg";
-      cb(null, `${Date.now()}-${uuidv4()}${ext}`);
-    }
-  }),
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: (_req, file, cb) => {
-    const ok = /jpeg|jpg|png|webp/i.test(file.mimetype) || /\.(jpe?g|png|webp)$/i.test(file.originalname);
-    cb(ok ? null : new Error("Only image files allowed"), ok);
-  }
-});
+const beceUpload = uploadMemory;
+const prefectUpload = uploadMemory;
+
+function assertBeceFile(file) {
+  const ok =
+    file &&
+    (/pdf|jpeg|jpg|png/i.test(file.mimetype) ||
+      /\.(pdf|jpe?g|png)$/i.test(file.originalname));
+  if (!ok) throw new Error("Only PDF, JPG, or PNG allowed");
+}
+
+function assertPrefectPhoto(file) {
+  const ok =
+    file &&
+    (/jpeg|jpg|png|webp/i.test(file.mimetype) ||
+      /\.(jpe?g|png|webp)$/i.test(file.originalname));
+  if (!ok) throw new Error("Only image files allowed");
+}
 
 /* ============================================================
    PUBLIC API
    ============================================================ */
 
 app.get("/api/health", async (_req, res) => {
-  res.json({ ok: true, service: "OLPSEC" });
+  await initDb();
+  res.json({
+    ok: true,
+    service: "OLPSEC",
+    database: getDbBackend(),
+    uploads: useBlobStorage() ? "vercel-blob" : "local-disk"
+  });
 });
 
 app.get("/api/content", async (_req, res) => {
@@ -254,7 +254,9 @@ app.post("/api/forms/placement", beceUpload.single("beceResult"), async (req, re
     if (!req.file) {
       return res.status(400).json({ error: "BECE result file is required" });
     }
+    assertBeceFile(req.file);
 
+    const saved = await saveUpload(req.file, { folder: "bece", fallbackExt: ".pdf" });
     const db = await readDb();
     const entry = {
       id: uuidv4(),
@@ -269,11 +271,12 @@ app.post("/api/forms/placement", beceUpload.single("beceResult"), async (req, re
       email: String(b.email).trim(),
       guardian: String(b.guardian).trim(),
       beceFile: {
-        originalName: req.file.originalname,
-        filename: req.file.filename,
-        url: `/uploads/bece/${req.file.filename}`,
-        size: req.file.size,
-        mimeType: req.file.mimetype
+        originalName: saved.originalName,
+        filename: saved.filename,
+        url: saved.url,
+        size: saved.size,
+        mimeType: saved.mimeType,
+        storage: saved.storage
       },
       status: "new",
       createdAt: new Date().toISOString()
@@ -524,13 +527,19 @@ app.post(
   prefectUpload.single("photo"),
   async (req, res) => {
     if (!req.file) return res.status(400).json({ error: "Photo required" });
+    try {
+      assertPrefectPhoto(req.file);
+    } catch (err) {
+      return res.status(400).json({ error: err.message });
+    }
     const db = await readDb();
     let prefect = db.content.prefects.find((p) => p.id === req.params.id);
     if (!prefect) {
       prefect = (db.content.outgoingPrefects || []).find((p) => p.id === req.params.id);
     }
     if (!prefect) return res.status(404).json({ error: "Prefect not found" });
-    prefect.photoUrl = `/uploads/prefects/${req.file.filename}`;
+    const saved = await saveUpload(req.file, { folder: "prefects", fallbackExt: ".jpg" });
+    prefect.photoUrl = saved.url;
     await writeDb(db);
     res.json({ ok: true, photoUrl: prefect.photoUrl, prefect });
   }
@@ -630,23 +639,31 @@ app.use((err, _req, res, _next) => {
   res.status(400).json({ error: err.message || "Request failed" });
 });
 
-initDb()
-  .then((database) => {
-    app.listen(PORT, () => {
-      console.log("");
-      console.log("OLPSEC server running");
-      console.log(`  Public site : http://localhost:${PORT}`);
-      console.log(`  Admin panel : http://admin.localhost:${PORT}`);
-      console.log("  (Production admin subdomain: https://admin.olpsec.edu.gh)");
-      console.log(`  Database    : ${database}`);
-      console.log("");
-      console.log("Default logins (CHANGE THESE):");
-      console.log("  admin / ChangeMeAdmin2026!");
-      console.log("  secretary / ChangeMeSecretary2026!");
-      console.log("");
+module.exports = app;
+
+/* Local / Railway long-running server — skipped on Vercel serverless */
+if (require.main === module) {
+  initDb()
+    .then((database) => {
+      app.listen(PORT, () => {
+        console.log("");
+        console.log("OLPSEC server running");
+        console.log(`  Public site : http://localhost:${PORT}`);
+        console.log(`  Admin panel : http://admin.localhost:${PORT}`);
+        console.log("  (Production admin subdomain: https://admin.olpsec.edu.gh)");
+        console.log(`  Database    : ${database}`);
+        console.log(
+          `  Uploads     : ${useBlobStorage() ? "Vercel Blob" : "local disk"}`
+        );
+        console.log("");
+        console.log("Default logins (CHANGE THESE):");
+        console.log("  admin / ChangeMeAdmin2026!");
+        console.log("  secretary / ChangeMeSecretary2026!");
+        console.log("");
+      });
+    })
+    .catch((err) => {
+      console.error("Failed to start database:", err);
+      process.exit(1);
     });
-  })
-  .catch((err) => {
-    console.error("Failed to start database:", err);
-    process.exit(1);
-  });
+}
