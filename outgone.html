@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Outgone SRC prefects of Our Lady Of Providence Senior High School (OLPSEC)." />
+  <title>Outgone SRC | OLPSEC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="outgone-page">
+  <header class="site-header" id="top">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="index.html#home" class="logo" aria-label="OLPSEC Home">
+        <span class="logo-crest-frame" aria-hidden="true">
+          <img src="images/olpsec-crest.png" alt="" class="logo-crest" width="44" height="44" />
+        </span>
+        <span class="logo-text">OLPSEC <span class="logo-star">✦</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#academics">Academics</a></li>
+        <li><a href="index.html#src">Current SRC</a></li>
+        <li><a href="outgone.html" class="active">Outgone SRC</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="outgone-hero">
+      <div class="container">
+        <a href="index.html#src" class="outgone-back"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Current SRC</a>
+        <h1>Outgone SRC</h1>
+        <p>Former student leaders of Our Lady Of Providence Senior High School who served with distinction.</p>
+      </div>
+    </section>
+
+    <section class="outgone-body">
+      <div class="container">
+        <div class="prefect-gallery outgone-gallery" id="outgoneGallery">
+          <p class="section-lead">Loading outgone SRC...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html#home" class="logo footer-logo">OLPSEC <span class="logo-star">✦</span></a>
+        <p class="footer-motto">"An Educated Woman is the Seed of the New Generation."</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="year"></span> Our Lady Of Providence Senior High School (OLPSEC).</p>
+        <a href="#top" class="footer-top-link"><i class="fas fa-arrow-up" aria-hidden="true"></i> Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="outgone.js" defer></script>
+</body>
+</html>

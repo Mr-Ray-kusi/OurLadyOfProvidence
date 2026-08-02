@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Our Lady Of Providence Senior High School (OLPSEC) — Category A girls' school in Kwasibuokrom, Bono Region, Ghana. Faith, discipline, and academic excellence since 1989." />
+  <title>OLPSEC | Our Lady Of Providence Senior High School</title>
+
+  <!-- Google Fonts: Playfair Display (titles) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       GLOBAL HEADER & STICKY NAVIGATION
+       Edit menu labels below if you rename pages/sections.
+       ============================================================ -->
+  <header class="site-header" id="top">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="#home" class="logo" aria-label="OLPSEC Home">
+        <span class="logo-crest-frame" aria-hidden="true">
+          <img src="images/olpsec-crest.png" alt="" class="logo-crest" width="44" height="44" />
+        </span>
+        <span class="logo-text">OLPSEC <span class="logo-star">✦</span></span>
+      </a>
+
+      <!-- Desktop / tablet menu links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#academics">Academics</a></li>
+        <li><a href="#self-placement">Apply</a></li>
+        <li><a href="#student-life">Student Life</a></li>
+        <li><a href="#src">SRC</a></li>
+        <li><a href="#alumni">Alumni</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Mobile hamburger button -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       LIVE NEWS TICKER  ★ ADMIN FAVORITE #1
+       HOW TO EDIT: Change the text inside each <span class="ticker-item">...</span>
+       Add or remove spans to add/remove announcements.
+       ============================================================ -->
+  <div class="news-ticker" role="marquee" aria-label="School announcements">
+    <div class="ticker-label"><i class="fas fa-bullhorn" aria-hidden="true"></i> Announcements</div>
+    <div class="ticker-track-wrap">
+      <div class="ticker-track" id="tickerTrack">
+        <!-- Filled from API / admin dashboard; fallback text below -->
+        <span class="ticker-item">Welcome to Our Lady Of Providence Senior High School (OLPSEC)</span>
+        <span class="ticker-item">Welcome to Our Lady Of Providence Senior High School (OLPSEC)</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ============================================================
+         B. HOMEPAGE HERO
+         HOW TO EDIT: Change headline, sub-headline, or CTAs below.
+         IMAGE: Replace the hero-image-placeholder background or
+         swap the <div> for an <img src="your-photo.jpg" alt="...">.
+         ============================================================ -->
+    <section class="hero" id="home">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-brand">Our Lady Of Providence Senior High School</p>
+        <h1 class="hero-headline">An Educated Woman is the Seed of the New Generation.</h1>
+        <p class="hero-sub">Empowering young women through faith, discipline, and academic excellence since 1989.</p>
+        <div class="hero-ctas">
+          <a href="#self-placement" class="btn btn-gold">Apply Now</a>
+          <a href="#about" class="btn btn-outline">Learn More</a>
+        </div>
+
+        <!-- Hero Stats Badges -->
+        <div class="hero-stats">
+          <div class="stat-badge">
+            <span class="stat-number">1989</span>
+            <span class="stat-label">Founded</span>
+          </div>
+          <div class="stat-badge">
+            <span class="stat-number">A</span>
+            <span class="stat-label">Category</span>
+          </div>
+          <div class="stat-badge">
+            <span class="stat-number">Top 10</span>
+            <span class="stat-label">Nationally</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ★ School entrance photo placeholder — replace with real image -->
+      <div class="hero-image-box" role="img" aria-label="School entrance photo placeholder — admin can upload a photo here">
+        <div class="hero-image-inner">
+          <i class="fas fa-school" aria-hidden="true"></i>
+          <p>School Entrance Photo</p>
+          <span class="upload-hint">Admin: replace this box with your school photo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DAILY BULLETIN — Academic schedule by day of the week
+         HOW TO EDIT: Update the <li> items inside each .day-panel.
+         The page auto-shows today's day; users can tap other days.
+         ============================================================ -->
+    <section class="bulletin-section" id="bulletin" aria-labelledby="bulletin-title">
+      <div class="container">
+        <div class="bulletin-board">
+          <div class="bulletin-pin" aria-hidden="true"></div>
+          <div class="bulletin-header">
+            <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+            <h2 id="bulletin-title">Daily Bulletin</h2>
+            <p class="bulletin-sub">Academic schedule — select a day</p>
+            <time class="bulletin-date" id="bulletinDate"></time>
+          </div>
+
+          <div class="day-tabs" id="dayTabs" role="tablist" aria-label="Days of the week">
+            <button type="button" class="day-tab" role="tab" data-day="0">Sun</button>
+            <button type="button" class="day-tab" role="tab" data-day="1">Mon</button>
+            <button type="button" class="day-tab" role="tab" data-day="2">Tue</button>
+            <button type="button" class="day-tab" role="tab" data-day="3">Wed</button>
+            <button type="button" class="day-tab" role="tab" data-day="4">Thu</button>
+            <button type="button" class="day-tab" role="tab" data-day="5">Fri</button>
+            <button type="button" class="day-tab" role="tab" data-day="6">Sat</button>
+          </div>
+
+          <!-- Loaded live from Admin dashboard -->
+          <div id="bulletinPanels"></div>
+
+          <p class="bulletin-footer-note">Posted by the Administration</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         D. ABOUT SECTION
+         Edit history text, founders, and motto blockquote as needed.
+         ============================================================ -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow"><i class="fas fa-seedling" aria-hidden="true"></i> Our Story</span>
+          <h2>About OLPSEC</h2>
+          <p class="section-lead">A legacy of faith, learning, and leadership for young women in Ghana.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-history glass-card">
+            <h3>Our History</h3>
+            <p>
+              Our Lady Of Providence Senior High School (OLPSEC) was founded on
+              <strong>November 19, 1989</strong> by the late
+              <strong>Bishop James Kwaku Owusu</strong> in partnership with the
+              <strong>Sisters of Divine Providence</strong>. Situated in
+              Kwasibuokrom, near Drobo/Japekrom in the Bono Region of Ghana,
+              OLPSEC has grown into a Category A Day and Boarding institution —
+              one of the top-performing girls' schools nationally.
+            </p>
+            <p>
+              Rooted in Catholic values and academic rigor, the school continues
+              to nurture young women who lead with integrity, serve with compassion,
+              and excel with purpose.
+            </p>
+          </div>
+
+          <div class="about-founders glass-card">
+            <h3>Our Founders</h3>
+            <!-- Replace image src files in images/founders/ with official portraits -->
+            <div class="founder-item">
+              <div class="founder-photo">
+                <img
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces"
+                  alt="Portrait of Bishop James Kwaku Owusu"
+                  width="120"
+                  height="120"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <h4>Bishop James Kwaku Owusu</h4>
+                <p>Visionary founder whose commitment to girls' education established OLPSEC as a beacon of learning in the Bono Region.</p>
+              </div>
+            </div>
+            <div class="founder-item">
+              <div class="founder-photo">
+                <img
+                  src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=400&fit=crop&crop=faces"
+                  alt="Sisters of Divine Providence"
+                  width="120"
+                  height="120"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <h4>Sisters of Divine Providence</h4>
+                <p>Partners in faith and formation, guiding the spiritual and moral life of the school community since its founding.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Motto Blockquote -->
+        <blockquote class="motto-block">
+          <i class="fas fa-quote-left motto-quote-icon" aria-hidden="true"></i>
+          <p class="motto-text">An Educated Woman is the Seed of the New Generation.</p>
+          <footer class="motto-attrib">— Motto of OLPSEC</footer>
+          <div class="motto-seed" aria-hidden="true"><i class="fas fa-seedling"></i></div>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ACADEMICS — Business, General Arts, General Science, Home Economics
+         ============================================================ -->
+    <section class="academics-section" id="academics">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Learning Pathways</span>
+          <h2>Academics</h2>
+          <p class="section-lead">Rigorous programs designed to prepare every student for university and beyond.</p>
+        </div>
+
+        <div class="cards-grid four-col">
+          <article class="glass-card program-card">
+            <div class="card-icon business"><i class="fas fa-chart-line" aria-hidden="true"></i></div>
+            <h3>Business</h3>
+            <p>Accounting, Business Management, Economics — preparing entrepreneurs and finance leaders of tomorrow.</p>
+          </article>
+          <article class="glass-card program-card">
+            <div class="card-icon arts"><i class="fas fa-book-open" aria-hidden="true"></i></div>
+            <h3>General Arts</h3>
+            <p>Literature, Government, History, Languages — cultivating critical thinkers, writers, and public servants.</p>
+          </article>
+          <article class="glass-card program-card">
+            <div class="card-icon science"><i class="fas fa-flask" aria-hidden="true"></i></div>
+            <h3>General Science</h3>
+            <p>Physics, Chemistry, Biology, Elective Mathematics — building future doctors, engineers, and researchers.</p>
+          </article>
+          <article class="glass-card program-card">
+            <div class="card-icon home-econ"><i class="fas fa-utensils" aria-hidden="true"></i></div>
+            <h3>Home Economics</h3>
+            <p>Foods &amp; Nutrition, Clothing &amp; Textiles, Management in Living — skills for life, health, and enterprise.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         F. STUDENT LIFE SECTION
+         ============================================================ -->
+    <section class="student-life-section" id="student-life">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow"><i class="fas fa-users" aria-hidden="true"></i> Beyond the Classroom</span>
+          <h2>Student Life</h2>
+          <p class="section-lead">Leadership, creativity, and service that shape character and community.</p>
+        </div>
+
+        <div class="cards-grid three-col">
+          <article class="glass-card life-card">
+            <div class="card-icon band"><i class="fas fa-music" aria-hidden="true"></i></div>
+            <h3>Brass &amp; Cadet Band</h3>
+            <p>Our exceptional regional brass and cadet band brings pride to OLPSEC at parades, ceremonies, and competitions across Ghana.</p>
+          </article>
+          <article class="glass-card life-card">
+            <div class="card-icon debate"><i class="fas fa-gavel" aria-hidden="true"></i></div>
+            <h3>Debate &amp; Leadership</h3>
+            <p>Vibrant student leadership and debate clubs sharpen voices that speak with confidence, clarity, and conviction.</p>
+          </article>
+          <article class="glass-card life-card">
+            <div class="card-icon service"><i class="fas fa-hands-helping" aria-hidden="true"></i></div>
+            <h3>Community Service</h3>
+            <p>Faith in action — outreach projects that serve neighboring communities and live out our Catholic mission.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SRC — Leadership Gallery (photos + positions)
+         HOW TO EDIT: Replace each img src with the prefect's photo
+         (e.g. images/prefects/school-prefect.jpg) and update names.
+         ============================================================ -->
+    <section class="src-section" id="src">
+      <div class="container">
+        <div class="section-header light">
+          <span class="section-eyebrow"><i class="fas fa-users" aria-hidden="true"></i> Student Voice</span>
+          <h2>SRC &amp; Leadership Gallery</h2>
+          <p class="section-lead">Meet the prefects who lead OLPSEC with service and integrity.</p>
+        </div>
+
+        <div class="prefect-gallery" id="prefectGallery">
+          <!-- Loaded live from Admin dashboard — current SRC only -->
+        </div>
+
+        <div class="src-outgone-link-wrap">
+          <a href="outgone.html" class="btn btn-outline src-outgone-link">See Outgone SRC</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         G5. SANITATION SCOREBOARD — Cleanliness Champions
+         ============================================================ -->
+    <section class="sanitation-section" id="sanitation">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow"><i class="fas fa-trophy" aria-hidden="true"></i> This Week</span>
+          <h2>Cleanliness Champions</h2>
+          <p class="section-lead">Live-style leaderboard for dormitory &amp; class sanitation scores.</p>
+        </div>
+
+        <div class="leaderboard glass-card">
+          <div class="leaderboard-header">
+            <span><i class="fas fa-broadcast-tower live-dot" aria-hidden="true"></i> Live Scoreboard</span>
+            <span class="week-label" id="cleanlinessWeek">This week</span>
+          </div>
+          <ol class="score-list" id="scoreList">
+            <!-- Loaded live from Admin dashboard -->
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         URGENT / EMERGENCY TEACHER MEETING
+         Normal Visiting Day does NOT require booking.
+         Use this form only for urgent or emergency concerns.
+         ============================================================ -->
+    <section class="ptc-section" id="visiting-day">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow"><i class="fas fa-exclamation-circle" aria-hidden="true"></i> Parent Engagement</span>
+          <h2>Urgent Visit</h2>
+          <p class="section-lead">
+            Request a meeting for <strong>urgent or emergency</strong> matters with your child's teacher/school heads.
+          </p>
+        </div>
+
+        <form class="form-card glass-card" id="ptcForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ptcParentName">Your Name <span class="required">*</span></label>
+              <input type="text" id="ptcParentName" name="parentName" required placeholder="e.g. Mrs. Adjei" autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="ptcChildName">Child's Name <span class="required">*</span></label>
+              <input type="text" id="ptcChildName" name="childName" required placeholder="e.g. Akua Adjei" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ptcClass">Class / Form <span class="required">*</span></label>
+              <select id="ptcClass" name="class" required>
+                <option value="">Select class</option>
+                <option value="Form 1 Science">Form 1 Science</option>
+                <option value="Form 1 Arts">Form 1 Arts</option>
+                <option value="Form 1 Business">Form 1 Business</option>
+                <option value="Form 1 Home Economics">Form 1 Home Economics</option>
+                <option value="Form 2 Science">Form 2 Science</option>
+                <option value="Form 2 Arts">Form 2 Arts</option>
+                <option value="Form 2 Business">Form 2 Business</option>
+                <option value="Form 2 Home Economics">Form 2 Home Economics</option>
+                <option value="Form 3 Science">Form 3 Science</option>
+                <option value="Form 3 Arts">Form 3 Arts</option>
+                <option value="Form 3 Business">Form 3 Business</option>
+                <option value="Form 3 Home Economics">Form 3 Home Economics</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ptcTime">Preferred Time <span class="required">*</span></label>
+              <select id="ptcTime" name="time" required>
+                <option value="">Select time slot</option>
+                <option value="9:00 AM – 10:00 AM">9:00 AM – 10:00 AM</option>
+                <option value="10:00 AM – 11:00 AM">10:00 AM – 11:00 AM</option>
+                <option value="11:00 AM – 12:00 PM">11:00 AM – 12:00 PM</option>
+                <option value="1:00 PM – 2:00 PM">1:00 PM – 2:00 PM</option>
+                <option value="2:00 PM – 3:00 PM">2:00 PM – 3:00 PM</option>
+                <option value="3:00 PM – 4:00 PM">3:00 PM – 4:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ptcReason">Nature of Emergency <span class="required">*</span></label>
+            <textarea id="ptcReason" name="reason" rows="3" required placeholder="Briefly describe why this meeting cannot wait for the next Visiting Day..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold btn-block">Request Urgent Visit</button>
+          <p class="form-message" id="ptcMessage" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ALUMNI CONNECT
+         Replace background image: images/alumni/group.jpg
+         ============================================================ -->
+    <section class="alumni-section" id="alumni">
+      <div class="container">
+        <div class="section-header light">
+          <span class="section-eyebrow"><i class="fas fa-heart" aria-hidden="true"></i> Old Girls Network</span>
+          <h2>Alumni Connect</h2>
+          <p class="section-lead">Stay connected to the OLPSEC family — reunions, mentorship, and lifelong bonds.</p>
+        </div>
+
+        <div class="alumni-layout">
+          <div class="alumni-intro">
+            <div class="alumni-intro-bg" aria-hidden="true"></div>
+            <div class="alumni-intro-content">
+              <h3>You Are the Seed</h3>
+              <p>
+                Every Old Girl carries the motto forward — in careers, families, and communities.
+                Register to join our alumni network, receive reunion updates, and mentor the next generation.
+              </p>
+              <ul class="alumni-benefits">
+                <li><i class="fas fa-check" aria-hidden="true"></i> Reunion &amp; homecoming invites</li>
+                <li><i class="fas fa-check" aria-hidden="true"></i> Mentorship opportunities</li>
+                <li><i class="fas fa-check" aria-hidden="true"></i> Career networking with fellow Old Girls</li>
+              </ul>
+            </div>
+          </div>
+
+          <form class="form-card glass-card" id="alumniForm" novalidate>
+            <div class="form-group">
+              <label for="alumniName">Full Name <span class="required">*</span></label>
+              <input type="text" id="alumniName" name="name" required placeholder="Your full name" autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="alumniYear">Year of Graduation <span class="required">*</span></label>
+              <input type="number" id="alumniYear" name="year" required min="1989" max="2030" placeholder="e.g. 2015" />
+            </div>
+            <div class="form-group">
+              <label for="alumniOccupation">Current Occupation <span class="required">*</span></label>
+              <input type="text" id="alumniOccupation" name="occupation" required placeholder="e.g. Nurse, Teacher, Engineer" />
+            </div>
+            <div class="form-group">
+              <label for="alumniLocation">Location <span class="required">*</span></label>
+              <input type="text" id="alumniLocation" name="location" required placeholder="City, Country" autocomplete="address-level2" />
+            </div>
+            <button type="submit" class="btn btn-gold btn-block">
+              <i class="fas fa-link" aria-hidden="true"></i> Connect with Alumni
+            </button>
+            <p class="form-message" id="alumniMessage" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         G6. DIGITAL CHAPEL / PRAYER REQUEST WALL
+         Submit prayer or thanksgiving notes. Name optional.
+         ============================================================ -->
+    <section class="chapel-section" id="chapel">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow"><i class="fas fa-pray" aria-hidden="true"></i> Faith &amp; Reflection</span>
+          <h2>Digital Chapel</h2>
+          <p class="section-lead">Share a prayer request or a note of thanksgiving. We hold one another in prayer.</p>
+        </div>
+
+        <div class="chapel-layout">
+          <form class="form-card glass-card" id="prayerForm" novalidate>
+            <div class="form-group">
+              <label for="prayerName">Your Name <span class="optional">(optional)</span></label>
+              <input type="text" id="prayerName" name="name" placeholder="Leave blank to remain anonymous" />
+            </div>
+            <div class="form-group">
+              <label for="prayerType">Type <span class="required">*</span></label>
+              <select id="prayerType" name="type" required>
+                <option value="Prayer Request">Prayer Request</option>
+                <option value="Thanksgiving">Thanksgiving</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="prayerMessage">Message <span class="required">*</span></label>
+              <textarea id="prayerMessage" name="message" rows="4" required placeholder="Share your prayer or thanksgiving..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold btn-block">Submit to the Wall</button>
+            <p class="form-message" id="prayerFormMessage" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="prayer-wall" id="prayerWall" aria-live="polite">
+            <!-- Loaded from API; new submissions appear after submit -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SELF PLACEMENT / BECE APPLICATION
+         New students or self-placement applicants upload BECE results
+         and submit the form. Replace upload handling with a real
+         backend when available.
+         ============================================================ -->
+    <section class="placement-section" id="self-placement">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow"><i class="fas fa-file-upload" aria-hidden="true"></i> Admissions</span>
+          <h2>Self Placement Application</h2>
+          <p class="section-lead">
+            Applying for self placement at OLPSEC? Complete the form below and upload your BECE results for review.
+          </p>
+        </div>
+
+        <div class="placement-layout">
+          <div class="placement-info glass-card">
+            <h3>How to Apply</h3>
+            <ol class="placement-steps">
+              <li>
+                <span class="step-num">1</span>
+                <div>
+                  <strong>Fill your details</strong>
+                  <p>Provide accurate personal and contact information.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <div>
+                  <strong>Choose a programme</strong>
+                  <p>Select Business, General Arts, General Science, or Home Economics.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <div>
+                  <strong>Upload BECE results</strong>
+                  <p>Attach a clear PDF or image of your BECE result slip (max 5 MB).</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">4</span>
+                <div>
+                  <strong>Submit &amp; wait</strong>
+                  <p>Admissions will contact you after reviewing your application.</p>
+                </div>
+              </li>
+            </ol>
+            <p class="placement-note">
+              <i class="fas fa-info-circle" aria-hidden="true"></i>
+              Self placement is subject to available vacancies and school admission policy.
+            </p>
+          </div>
+
+          <form class="form-card glass-card" id="placementForm" novalidate enctype="multipart/form-data">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="placementName">Full Name <span class="required">*</span></label>
+                <input type="text" id="placementName" name="fullName" required placeholder="As on BECE results" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="placementIndex">BECE Index Number <span class="required">*</span></label>
+                <input type="text" id="placementIndex" name="indexNumber" required placeholder="e.g. 050201XXXX" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="placementGender">Gender <span class="required">*</span></label>
+                <select id="placementGender" name="gender" required>
+                  <option value="">Select</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="placementYear">BECE Year <span class="required">*</span></label>
+                <input type="number" id="placementYear" name="beceYear" required min="2015" max="2030" placeholder="e.g. 2025" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="placementJhs">Junior High School Attended <span class="required">*</span></label>
+              <input type="text" id="placementJhs" name="jhs" required placeholder="Name of your JHS" />
+            </div>
+
+            <div class="form-group">
+              <label for="placementProgramme">Preferred Programme <span class="required">*</span></label>
+              <select id="placementProgramme" name="programme" required>
+                <option value="">Select programme</option>
+                <option value="Business">Business</option>
+                <option value="General Arts">General Arts</option>
+                <option value="General Science">General Science</option>
+                <option value="Home Economics">Home Economics</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="placementPhone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="placementPhone" name="phone" required placeholder="e.g. 024 XXX XXXX" autocomplete="tel" />
+              </div>
+              <div class="form-group">
+                <label for="placementEmail">Email <span class="required">*</span></label>
+                <input type="email" id="placementEmail" name="email" required placeholder="you@example.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="placementGuardian">Parent / Guardian Name <span class="required">*</span></label>
+              <input type="text" id="placementGuardian" name="guardian" required placeholder="Parent or guardian full name" />
+            </div>
+
+            <div class="form-group">
+              <label for="placementBeceFile">Upload BECE Result <span class="required">*</span></label>
+              <div class="file-upload" id="fileUploadBox">
+                <input type="file" id="placementBeceFile" name="beceResult" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required />
+                <label for="placementBeceFile" class="file-upload-label">
+                  <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                  <span class="file-upload-title">Choose file or drag here</span>
+                  <span class="file-upload-hint">PDF, JPG, or PNG — maximum 5 MB</span>
+                </label>
+                <p class="file-name" id="placementFileName" aria-live="polite"></p>
+              </div>
+            </div>
+
+            <div class="form-group form-check">
+              <input type="checkbox" id="placementConfirm" name="confirm" required />
+              <label for="placementConfirm">I confirm that the information and BECE results provided are true and accurate. <span class="required">*</span></label>
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-block">
+              <i class="fas fa-paper-plane" aria-hidden="true"></i> Submit Application
+            </button>
+            <p class="form-message" id="placementMessage" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         H. CONTACT SECTION
+         Left: Map + address | Right: Contact form
+         ============================================================ -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow"><i class="fas fa-envelope" aria-hidden="true"></i> Get in Touch</span>
+          <h2>Contact Us</h2>
+          <p class="section-lead">Admissions, visits, and general inquiries — we are here to help.</p>
+        </div>
+
+        <div class="contact-split">
+          <!-- Left: Map & Address -->
+          <div class="contact-info glass-card">
+            <h3>Visit Us</h3>
+            <address>
+              <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                Our Lady Of Providence Senior High School<br />
+                Kwasibuokrom, near Drobo/Japekrom<br />
+                Bono Region, Ghana
+              </p>
+              <p><i class="fas fa-phone" aria-hidden="true"></i> +233 XX XXX XXXX</p>
+              <p><i class="fas fa-envelope" aria-hidden="true"></i> info@olpsec.edu.gh</p>
+              <p><i class="fas fa-calendar" aria-hidden="true"></i> Founded November 19, 1989</p>
+            </address>
+
+            <!-- Google Maps embed — replace src with exact coordinates if desired -->
+            <div class="map-wrap">
+              <iframe
+                title="Map of OLPSEC area — Drobo / Japekrom, Bono Region"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://maps.google.com/maps?q=Drobo%20Japekrom%20Bono%20Region%20Ghana&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Right: Contact Form -->
+          <form class="form-card glass-card" id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="contactName">Name <span class="required">*</span></label>
+              <input type="text" id="contactName" name="name" required placeholder="Your full name" autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="contactRole">I am a <span class="required">*</span></label>
+              <select id="contactRole" name="role" required>
+                <option value="">Select one</option>
+                <option value="Student">Student</option>
+                <option value="Parent">Parent</option>
+                <option value="Staff">Staff</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Email <span class="required">*</span></label>
+              <input type="email" id="contactEmail" name="email" required placeholder="you@example.com" autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="contactMessage">Message <span class="required">*</span></label>
+              <textarea id="contactMessage" name="message" rows="5" required placeholder="How can we help you?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold btn-block">Send Message</button>
+            <p class="form-message" id="contactMessageStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#home" class="logo footer-logo">OLPSEC <span class="logo-star">✦</span></a>
+        <p class="footer-motto">"An Educated Woman is the Seed of the New Generation."</p>
+        <p class="footer-meta">Category A · Day &amp; Boarding · Bono Region, Ghana</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-link-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#academics">Academics</a></li>
+          <li><a href="#self-placement">Apply</a></li>
+          <li><a href="#src">SRC</a></li>
+          <li><a href="#alumni">Alumni</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-social">
+        <h4 class="footer-heading">Connect With Us</h4>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="year"></span> Our Lady Of Providence Senior High School (OLPSEC).</p>
+        <a href="#top" class="footer-top-link"><i class="fas fa-arrow-up" aria-hidden="true"></i> Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript -->
+  <script src="script.js" defer></script>
+</body>
+</html>

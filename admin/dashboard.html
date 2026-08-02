@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>OLPSEC Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="dash-page">
+  <aside class="sidebar">
+    <div class="sidebar-brand">OLPSEC <span>✦</span></div>
+    <p class="sidebar-user" id="sidebarUser"></p>
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-btn active" data-view="overview"><i class="fas fa-gauge-high"></i> Overview</button>
+      <button type="button" class="nav-btn" data-view="forms-placement"><i class="fas fa-file-upload"></i> Self Placement</button>
+      <button type="button" class="nav-btn" data-view="forms-contact"><i class="fas fa-envelope"></i> Contact</button>
+      <button type="button" class="nav-btn" data-view="forms-alumni"><i class="fas fa-link"></i> Alumni</button>
+      <button type="button" class="nav-btn" data-view="forms-urgent"><i class="fas fa-exclamation-circle"></i> Urgent Visits</button>
+      <button type="button" class="nav-btn" data-view="forms-prayer"><i class="fas fa-pray"></i> Prayer Wall</button>
+      <button type="button" class="nav-btn" data-view="account"><i class="fas fa-user-shield"></i> Account</button>
+      <div class="nav-divider admin-only" hidden>Live site</div>
+      <button type="button" class="nav-btn admin-only" data-view="edit-bulletin" hidden><i class="fas fa-clipboard-list"></i> Daily Bulletin</button>
+      <button type="button" class="nav-btn admin-only" data-view="edit-src" hidden><i class="fas fa-users"></i> SRC Prefects</button>
+      <button type="button" class="nav-btn admin-only" data-view="edit-cleanliness" hidden><i class="fas fa-trophy"></i> Cleanliness</button>
+      <button type="button" class="nav-btn admin-only" data-view="edit-ticker" hidden><i class="fas fa-bullhorn"></i> News Ticker</button>
+    </nav>
+    <button type="button" class="logout-btn" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Sign out</button>
+  </aside>
+
+  <div class="dash-main">
+    <header class="dash-top">
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+      <h1 id="viewTitle">Overview</h1>
+      <span class="role-pill" id="rolePill"></span>
+    </header>
+
+    <section class="view active" id="view-overview"></section>
+    <section class="view" id="view-forms-placement"></section>
+    <section class="view" id="view-forms-contact"></section>
+    <section class="view" id="view-forms-alumni"></section>
+    <section class="view" id="view-forms-urgent"></section>
+    <section class="view" id="view-forms-prayer"></section>
+    <section class="view" id="view-account"></section>
+    <section class="view" id="view-edit-bulletin"></section>
+    <section class="view" id="view-edit-src"></section>
+    <section class="view" id="view-edit-cleanliness"></section>
+    <section class="view" id="view-edit-ticker"></section>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+node_modules/
+server/data/db.json
+server/data/db.json.migrated-*.bak
+server/data/olpsec.db
+server/data/olpsec.db-wal
+server/data/olpsec.db-shm
+server/uploads/bece/*
+server/uploads/prefects/*
+server/uploads/reels/*
+!server/uploads/bece/.gitkeep
+!server/uploads/prefects/.gitkeep
+!server/uploads/reels/.gitkeep
+.env
+*.log
+.DS_Store
