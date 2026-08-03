@@ -418,8 +418,9 @@ textarea {
   inset: 0;
   z-index: 0;
   background:
-    url("images/hero-students.png") center 30% / cover no-repeat;
-  transform: scale(1.03);
+    url("images/hero-students.png") center 35% / cover no-repeat;
+  filter: brightness(1.08) contrast(1.06) saturate(1.05);
+  transform: scale(1.02);
   animation: heroKenBurns 24s ease-in-out infinite alternate;
 }
 
@@ -431,16 +432,16 @@ textarea {
   background:
     linear-gradient(
       100deg,
-      rgba(6, 31, 74, 0.8) 0%,
-      rgba(6, 31, 74, 0.52) 34%,
-      rgba(6, 31, 74, 0.16) 62%,
-      rgba(6, 31, 74, 0.04) 100%
+      rgba(6, 31, 74, 0.58) 0%,
+      rgba(6, 31, 74, 0.32) 36%,
+      rgba(6, 31, 74, 0.1) 64%,
+      rgba(6, 31, 74, 0.02) 100%
     ),
     linear-gradient(
       to top,
-      rgba(6, 31, 74, 0.68) 0%,
-      rgba(6, 31, 74, 0.18) 40%,
-      transparent 68%
+      rgba(6, 31, 74, 0.45) 0%,
+      rgba(6, 31, 74, 0.12) 38%,
+      transparent 70%
     );
   pointer-events: none;
 }
@@ -1350,9 +1351,9 @@ textarea {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.22), transparent 45%),
-    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08), transparent 40%);
-  opacity: 0.9;
+    linear-gradient(180deg, rgba(13, 59, 46, 0.35) 0%, rgba(13, 59, 46, 0.82) 72%),
+    url("images/olpsec-campus-clear.png") center 40% / cover no-repeat;
+  opacity: 1;
 }
 
 .alumni-intro-content {
@@ -1954,15 +1955,15 @@ textarea {
     background:
       linear-gradient(
         100deg,
-        rgba(6, 31, 74, 0.82) 0%,
-        rgba(6, 31, 74, 0.5) 45%,
-        rgba(6, 31, 74, 0.22) 100%
+        rgba(6, 31, 74, 0.62) 0%,
+        rgba(6, 31, 74, 0.35) 48%,
+        rgba(6, 31, 74, 0.18) 100%
       ),
       linear-gradient(
         to top,
-        rgba(6, 31, 74, 0.65) 0%,
-        rgba(6, 31, 74, 0.15) 50%,
-        transparent 75%
+        rgba(6, 31, 74, 0.5) 0%,
+        rgba(6, 31, 74, 0.12) 50%,
+        transparent 78%
       );
   }
 
