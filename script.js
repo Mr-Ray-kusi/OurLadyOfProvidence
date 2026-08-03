@@ -20,6 +20,7 @@
     initPtcForm();
     initPrayerForm();
     initPlacementForm();
+    initFormSwitcher();
   });
 
   function initYear() {
@@ -256,8 +257,10 @@
       var navMap = {
         bulletin: "home",
         sanitation: "student-life",
-        "visiting-day": "contact",
-        chapel: "about",
+        community: "alumni",
+        "visiting-day": "alumni",
+        alumni: "alumni",
+        chapel: "alumni",
         "self-placement": "self-placement"
       };
       var highlightId = navMap[currentId] || currentId;
@@ -617,5 +620,55 @@
         setMessage(msg, err.message || "Could not submit application.", "error");
       }
     });
+  }
+
+  /* ---------- Community form switcher ---------- */
+  function initFormSwitcher() {
+    var buttons = document.querySelectorAll("[data-form-tab]");
+    var panels = document.querySelectorAll("[data-form-panel]");
+    if (!buttons.length || !panels.length) return;
+
+    var hashMap = {
+      "visiting-day": "urgent",
+      alumni: "alumni",
+      chapel: "chapel",
+      community: "urgent"
+    };
+
+    function showPanel(key) {
+      buttons.forEach(function (btn) {
+        var active = btn.getAttribute("data-form-tab") === key;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      panels.forEach(function (panel) {
+        var active = panel.getAttribute("data-form-panel") === key;
+        panel.classList.toggle("is-active", active);
+        if (active) {
+          panel.removeAttribute("hidden");
+        } else {
+          panel.setAttribute("hidden", "");
+        }
+      });
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var key = btn.getAttribute("data-form-tab");
+        showPanel(key);
+        var panel = document.querySelector('[data-form-panel="' + key + '"]');
+        if (panel && panel.id) {
+          history.replaceState(null, "", "#" + panel.id);
+        }
+      });
+    });
+
+    function applyHash() {
+      var hash = (location.hash || "").replace("#", "");
+      if (hashMap[hash]) showPanel(hashMap[hash]);
+    }
+
+    window.addEventListener("hashchange", applyHash);
+    applyHash();
   }
 })();

@@ -330,163 +330,215 @@
     </section>
 
     <!-- ============================================================
-         URGENT / EMERGENCY TEACHER MEETING
-         Normal Visiting Day does NOT require booking.
-         Use this form only for urgent or emergency concerns.
+         COMMUNITY FORMS HUB
+         Three selectors: Urgent Visit | Alumni Connect | Digital Chapel
+         Only one panel is visible at a time.
          ============================================================ -->
-    <section class="ptc-section" id="visiting-day">
+    <section class="forms-hub-section" id="community">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow"><i class="fas fa-exclamation-circle" aria-hidden="true"></i> Parent Engagement</span>
-          <h2>Urgent Visit</h2>
-          <p class="section-lead">
-            Request a meeting for <strong>urgent or emergency</strong> matters with your child's teacher/school heads.
-          </p>
+          <span class="section-eyebrow"><i class="fas fa-handshake" aria-hidden="true"></i> Connect with OLPSEC</span>
+          <h2>Forms &amp; Community</h2>
+          <p class="section-lead">Choose a form below. Only one is shown at a time to keep the page clear.</p>
         </div>
 
-        <form class="form-card glass-card" id="ptcForm" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="ptcParentName">Your Name <span class="required">*</span></label>
-              <input type="text" id="ptcParentName" name="parentName" required placeholder="e.g. Mrs. Adjei" autocomplete="name" />
-            </div>
-            <div class="form-group">
-              <label for="ptcChildName">Child's Name <span class="required">*</span></label>
-              <input type="text" id="ptcChildName" name="childName" required placeholder="e.g. Akua Adjei" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="ptcClass">Class / Form <span class="required">*</span></label>
-              <select id="ptcClass" name="class" required>
-                <option value="">Select class</option>
-                <option value="Form 1 Science">Form 1 Science</option>
-                <option value="Form 1 Arts">Form 1 Arts</option>
-                <option value="Form 1 Business">Form 1 Business</option>
-                <option value="Form 1 Home Economics">Form 1 Home Economics</option>
-                <option value="Form 2 Science">Form 2 Science</option>
-                <option value="Form 2 Arts">Form 2 Arts</option>
-                <option value="Form 2 Business">Form 2 Business</option>
-                <option value="Form 2 Home Economics">Form 2 Home Economics</option>
-                <option value="Form 3 Science">Form 3 Science</option>
-                <option value="Form 3 Arts">Form 3 Arts</option>
-                <option value="Form 3 Business">Form 3 Business</option>
-                <option value="Form 3 Home Economics">Form 3 Home Economics</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="ptcTime">Preferred Time <span class="required">*</span></label>
-              <select id="ptcTime" name="time" required>
-                <option value="">Select time slot</option>
-                <option value="9:00 AM – 10:00 AM">9:00 AM – 10:00 AM</option>
-                <option value="10:00 AM – 11:00 AM">10:00 AM – 11:00 AM</option>
-                <option value="11:00 AM – 12:00 PM">11:00 AM – 12:00 PM</option>
-                <option value="1:00 PM – 2:00 PM">1:00 PM – 2:00 PM</option>
-                <option value="2:00 PM – 3:00 PM">2:00 PM – 3:00 PM</option>
-                <option value="3:00 PM – 4:00 PM">3:00 PM – 4:00 PM</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="ptcReason">Nature of Emergency <span class="required">*</span></label>
-            <textarea id="ptcReason" name="reason" rows="3" required placeholder="Briefly describe why this meeting cannot wait for the next Visiting Day..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-gold btn-block">Request Urgent Visit</button>
-          <p class="form-message" id="ptcMessage" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         ALUMNI CONNECT
-         Replace background image: images/alumni/group.jpg
-         ============================================================ -->
-    <section class="alumni-section" id="alumni">
-      <div class="container">
-        <div class="section-header light">
-          <span class="section-eyebrow"><i class="fas fa-heart" aria-hidden="true"></i> Old Girls Network</span>
-          <h2>Alumni Connect</h2>
-          <p class="section-lead">Stay connected to the OLPSEC family — reunions, mentorship, and lifelong bonds.</p>
+        <div class="form-switcher" role="tablist" aria-label="Choose a form">
+          <button
+            type="button"
+            class="form-switch-btn is-active"
+            role="tab"
+            id="tab-urgent"
+            aria-selected="true"
+            aria-controls="visiting-day"
+            data-form-tab="urgent"
+          >
+            <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+            <span>Urgent Visit</span>
+          </button>
+          <button
+            type="button"
+            class="form-switch-btn"
+            role="tab"
+            id="tab-alumni"
+            aria-selected="false"
+            aria-controls="alumni"
+            data-form-tab="alumni"
+          >
+            <i class="fas fa-heart" aria-hidden="true"></i>
+            <span>Alumni Connect</span>
+          </button>
+          <button
+            type="button"
+            class="form-switch-btn"
+            role="tab"
+            id="tab-chapel"
+            aria-selected="false"
+            aria-controls="chapel"
+            data-form-tab="chapel"
+          >
+            <i class="fas fa-pray" aria-hidden="true"></i>
+            <span>Digital Chapel</span>
+          </button>
         </div>
 
-        <div class="alumni-layout">
-          <div class="alumni-intro">
-            <div class="alumni-intro-bg" aria-hidden="true"></div>
-            <div class="alumni-intro-content">
-              <h3>You Are the Seed</h3>
-              <p>
-                Every Old Girl carries the motto forward — in careers, families, and communities.
-                Register to join our alumni network, receive reunion updates, and mentor the next generation.
-              </p>
-              <ul class="alumni-benefits">
-                <li><i class="fas fa-check" aria-hidden="true"></i> Reunion &amp; homecoming invites</li>
-                <li><i class="fas fa-check" aria-hidden="true"></i> Mentorship opportunities</li>
-                <li><i class="fas fa-check" aria-hidden="true"></i> Career networking with fellow Old Girls</li>
-              </ul>
-            </div>
+        <!-- 1. Urgent Visit -->
+        <div
+          class="form-panel is-active"
+          id="visiting-day"
+          role="tabpanel"
+          aria-labelledby="tab-urgent"
+          data-form-panel="urgent"
+        >
+          <div class="form-panel-header">
+            <h3>Urgent Visit</h3>
+            <p>
+              Request a meeting for <strong>urgent or emergency</strong> matters with your child's teacher/school heads.
+            </p>
           </div>
-
-          <form class="form-card glass-card" id="alumniForm" novalidate>
-            <div class="form-group">
-              <label for="alumniName">Full Name <span class="required">*</span></label>
-              <input type="text" id="alumniName" name="name" required placeholder="Your full name" autocomplete="name" />
+          <form class="form-card glass-card" id="ptcForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ptcParentName">Your Name <span class="required">*</span></label>
+                <input type="text" id="ptcParentName" name="parentName" required placeholder="e.g. Mrs. Adjei" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="ptcChildName">Child's Name <span class="required">*</span></label>
+                <input type="text" id="ptcChildName" name="childName" required placeholder="e.g. Akua Adjei" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ptcClass">Class / Form <span class="required">*</span></label>
+                <select id="ptcClass" name="class" required>
+                  <option value="">Select class</option>
+                  <option value="Form 1 Science">Form 1 Science</option>
+                  <option value="Form 1 Arts">Form 1 Arts</option>
+                  <option value="Form 1 Business">Form 1 Business</option>
+                  <option value="Form 1 Home Economics">Form 1 Home Economics</option>
+                  <option value="Form 2 Science">Form 2 Science</option>
+                  <option value="Form 2 Arts">Form 2 Arts</option>
+                  <option value="Form 2 Business">Form 2 Business</option>
+                  <option value="Form 2 Home Economics">Form 2 Home Economics</option>
+                  <option value="Form 3 Science">Form 3 Science</option>
+                  <option value="Form 3 Arts">Form 3 Arts</option>
+                  <option value="Form 3 Business">Form 3 Business</option>
+                  <option value="Form 3 Home Economics">Form 3 Home Economics</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ptcTime">Preferred Time <span class="required">*</span></label>
+                <select id="ptcTime" name="time" required>
+                  <option value="">Select time slot</option>
+                  <option value="9:00 AM – 10:00 AM">9:00 AM – 10:00 AM</option>
+                  <option value="10:00 AM – 11:00 AM">10:00 AM – 11:00 AM</option>
+                  <option value="11:00 AM – 12:00 PM">11:00 AM – 12:00 PM</option>
+                  <option value="1:00 PM – 2:00 PM">1:00 PM – 2:00 PM</option>
+                  <option value="2:00 PM – 3:00 PM">2:00 PM – 3:00 PM</option>
+                  <option value="3:00 PM – 4:00 PM">3:00 PM – 4:00 PM</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
-              <label for="alumniYear">Year of Graduation <span class="required">*</span></label>
-              <input type="number" id="alumniYear" name="year" required min="1989" max="2030" placeholder="e.g. 2015" />
+              <label for="ptcReason">Nature of Emergency <span class="required">*</span></label>
+              <textarea id="ptcReason" name="reason" rows="3" required placeholder="Briefly describe why this meeting cannot wait for the next Visiting Day..."></textarea>
             </div>
-            <div class="form-group">
-              <label for="alumniOccupation">Current Occupation <span class="required">*</span></label>
-              <input type="text" id="alumniOccupation" name="occupation" required placeholder="e.g. Nurse, Teacher, Engineer" />
-            </div>
-            <div class="form-group">
-              <label for="alumniLocation">Location <span class="required">*</span></label>
-              <input type="text" id="alumniLocation" name="location" required placeholder="City, Country" autocomplete="address-level2" />
-            </div>
-            <button type="submit" class="btn btn-gold btn-block">
-              <i class="fas fa-link" aria-hidden="true"></i> Connect with Alumni
-            </button>
-            <p class="form-message" id="alumniMessage" role="status" aria-live="polite"></p>
+            <button type="submit" class="btn btn-gold btn-block">Request Urgent Visit</button>
+            <p class="form-message" id="ptcMessage" role="status" aria-live="polite"></p>
           </form>
         </div>
-      </div>
-    </section>
 
-    <!-- ============================================================
-         G6. DIGITAL CHAPEL / PRAYER REQUEST WALL
-         Submit prayer or thanksgiving notes. Name optional.
-         ============================================================ -->
-    <section class="chapel-section" id="chapel">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow"><i class="fas fa-pray" aria-hidden="true"></i> Faith &amp; Reflection</span>
-          <h2>Digital Chapel</h2>
-          <p class="section-lead">Share a prayer request or a note of thanksgiving. We hold one another in prayer.</p>
+        <!-- 2. Alumni Connect -->
+        <div
+          class="form-panel"
+          id="alumni"
+          role="tabpanel"
+          aria-labelledby="tab-alumni"
+          data-form-panel="alumni"
+          hidden
+        >
+          <div class="form-panel-header">
+            <h3>Alumni Connect</h3>
+            <p>Stay connected to the OLPSEC family — reunions, mentorship, and lifelong bonds.</p>
+          </div>
+          <div class="alumni-layout">
+            <div class="alumni-intro">
+              <div class="alumni-intro-bg" aria-hidden="true"></div>
+              <div class="alumni-intro-content">
+                <h3>You Are the Seed</h3>
+                <p>
+                  Every Old Girl carries the motto forward — in careers, families, and communities.
+                  Register to join our alumni network, receive reunion updates, and mentor the next generation.
+                </p>
+                <ul class="alumni-benefits">
+                  <li><i class="fas fa-check" aria-hidden="true"></i> Reunion &amp; homecoming invites</li>
+                  <li><i class="fas fa-check" aria-hidden="true"></i> Mentorship opportunities</li>
+                  <li><i class="fas fa-check" aria-hidden="true"></i> Career networking with fellow Old Girls</li>
+                </ul>
+              </div>
+            </div>
+
+            <form class="form-card glass-card" id="alumniForm" novalidate>
+              <div class="form-group">
+                <label for="alumniName">Full Name <span class="required">*</span></label>
+                <input type="text" id="alumniName" name="name" required placeholder="Your full name" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="alumniYear">Year of Graduation <span class="required">*</span></label>
+                <input type="number" id="alumniYear" name="year" required min="1989" max="2030" placeholder="e.g. 2015" />
+              </div>
+              <div class="form-group">
+                <label for="alumniOccupation">Current Occupation <span class="required">*</span></label>
+                <input type="text" id="alumniOccupation" name="occupation" required placeholder="e.g. Nurse, Teacher, Engineer" />
+              </div>
+              <div class="form-group">
+                <label for="alumniLocation">Location <span class="required">*</span></label>
+                <input type="text" id="alumniLocation" name="location" required placeholder="City, Country" autocomplete="address-level2" />
+              </div>
+              <button type="submit" class="btn btn-gold btn-block">
+                <i class="fas fa-link" aria-hidden="true"></i> Connect with Alumni
+              </button>
+              <p class="form-message" id="alumniMessage" role="status" aria-live="polite"></p>
+            </form>
+          </div>
         </div>
 
-        <div class="chapel-layout">
-          <form class="form-card glass-card" id="prayerForm" novalidate>
-            <div class="form-group">
-              <label for="prayerName">Your Name <span class="optional">(optional)</span></label>
-              <input type="text" id="prayerName" name="name" placeholder="Leave blank to remain anonymous" />
-            </div>
-            <div class="form-group">
-              <label for="prayerType">Type <span class="required">*</span></label>
-              <select id="prayerType" name="type" required>
-                <option value="Prayer Request">Prayer Request</option>
-                <option value="Thanksgiving">Thanksgiving</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="prayerMessage">Message <span class="required">*</span></label>
-              <textarea id="prayerMessage" name="message" rows="4" required placeholder="Share your prayer or thanksgiving..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-gold btn-block">Submit to the Wall</button>
-            <p class="form-message" id="prayerFormMessage" role="status" aria-live="polite"></p>
-          </form>
+        <!-- 3. Digital Chapel -->
+        <div
+          class="form-panel"
+          id="chapel"
+          role="tabpanel"
+          aria-labelledby="tab-chapel"
+          data-form-panel="chapel"
+          hidden
+        >
+          <div class="form-panel-header">
+            <h3>Digital Chapel</h3>
+            <p>Share a prayer request or a note of thanksgiving. We hold one another in prayer.</p>
+          </div>
+          <div class="chapel-layout">
+            <form class="form-card glass-card" id="prayerForm" novalidate>
+              <div class="form-group">
+                <label for="prayerName">Your Name <span class="optional">(optional)</span></label>
+                <input type="text" id="prayerName" name="name" placeholder="Leave blank to remain anonymous" />
+              </div>
+              <div class="form-group">
+                <label for="prayerType">Type <span class="required">*</span></label>
+                <select id="prayerType" name="type" required>
+                  <option value="Prayer Request">Prayer Request</option>
+                  <option value="Thanksgiving">Thanksgiving</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="prayerMessage">Message <span class="required">*</span></label>
+                <textarea id="prayerMessage" name="message" rows="4" required placeholder="Share your prayer or thanksgiving..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-gold btn-block">Submit to the Wall</button>
+              <p class="form-message" id="prayerFormMessage" role="status" aria-live="polite"></p>
+            </form>
 
-          <div class="prayer-wall" id="prayerWall" aria-live="polite">
-            <!-- Loaded from API; new submissions appear after submit -->
+            <div class="prayer-wall" id="prayerWall" aria-live="polite">
+              <!-- Loaded from API; new submissions appear after submit -->
+            </div>
           </div>
         </div>
       </div>

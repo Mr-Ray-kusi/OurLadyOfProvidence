@@ -1217,11 +1217,90 @@ textarea {
   font-size: 1.05rem;
 }
 
-/* ---------- PTC Scheduler ---------- */
-.ptc-section {
+/* ---------- Community forms hub (Urgent / Alumni / Chapel) ---------- */
+.forms-hub-section {
   padding: 4.5rem 0;
   background:
-    linear-gradient(180deg, var(--gray-100) 0%, var(--off-white) 100%);
+    linear-gradient(180deg, var(--gray-100) 0%, var(--off-white) 55%, #eef5f0 100%);
+}
+
+.form-switcher {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  max-width: 920px;
+  margin: 0 auto 2rem;
+}
+
+.form-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--blue-dark);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.form-switch-btn i {
+  color: var(--gold-dark);
+}
+
+.form-switch-btn:hover {
+  border-color: rgba(10, 47, 108, 0.35);
+  box-shadow: var(--shadow);
+}
+
+.form-switch-btn.is-active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.form-switch-btn.is-active i {
+  color: var(--gold-light);
+}
+
+.form-panel {
+  display: none;
+  animation: fadeUp 0.45s ease both;
+}
+
+.form-panel.is-active {
+  display: block;
+}
+
+.form-panel-header {
+  max-width: 680px;
+  margin: 0 auto 1.35rem;
+  text-align: center;
+}
+
+.form-panel-header h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  color: var(--blue-dark);
+  margin-bottom: 0.45rem;
+}
+
+.form-panel-header p {
+  color: var(--gray-700);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.forms-hub-section .form-card {
+  max-width: 680px;
+  margin-inline: auto;
+  background: rgba(255, 255, 255, 0.88);
 }
 
 .ptc-notice {
@@ -1248,112 +1327,100 @@ textarea {
   line-height: 1.55;
 }
 
-.ptc-section .form-card {
-  max-width: 680px;
-  margin-inline: auto;
-  background: rgba(255, 255, 255, 0.8);
-}
-
-/* ---------- Alumni ---------- */
-.alumni-section {
-  padding: 4.5rem 0;
-  background:
-    linear-gradient(160deg, #0d3b2e 0%, var(--green) 45%, #1b4332 100%);
-  position: relative;
-}
-
-.alumni-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 15% 80%, rgba(82, 183, 136, 0.2) 0%, transparent 40%),
-    radial-gradient(circle at 85% 20%, rgba(212, 175, 55, 0.12) 0%, transparent 35%);
-  pointer-events: none;
-}
-
+/* ---------- Alumni (panel content) ---------- */
 .alumni-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.05fr 0.95fr;
   gap: 1.5rem;
-  position: relative;
-  z-index: 1;
+  align-items: stretch;
+  max-width: 980px;
+  margin-inline: auto;
 }
 
 .alumni-intro {
   position: relative;
-  border-radius: var(--radius);
   overflow: hidden;
-  min-height: 420px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: var(--shadow);
-  display: flex;
-  align-items: flex-end;
+  border-radius: var(--radius);
+  min-height: 280px;
+  background: linear-gradient(160deg, #0d3b2e 0%, var(--green) 45%, #1b4332 100%);
+  color: var(--white);
 }
 
 .alumni-intro-bg {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(13, 59, 46, 0.25) 0%, rgba(13, 59, 46, 0.88) 70%),
-    url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=900&fit=crop")
-      center / cover no-repeat;
+    radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.22), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08), transparent 40%);
+  opacity: 0.9;
 }
 
 .alumni-intro-content {
   position: relative;
   z-index: 1;
-  padding: 2rem 1.75rem;
-  color: var(--white);
+  padding: 1.75rem 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.85rem;
 }
 
 .alumni-intro-content h3 {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   color: var(--gold-light);
-  margin-bottom: 0.75rem;
 }
 
 .alumni-intro-content p {
-  opacity: 0.95;
-  margin-bottom: 1.25rem;
-  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
 }
 
 .alumni-benefits li {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 0.55rem;
-  font-size: 0.9rem;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-top: 0.45rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.92rem;
 }
 
 .alumni-benefits i {
-  color: var(--seed);
+  color: var(--gold-light);
+  margin-top: 0.2rem;
 }
 
-.alumni-section .form-card {
-  background: rgba(255, 255, 255, 0.95);
+#alumni .form-card {
+  margin-inline: 0;
+  max-width: none;
+  height: 100%;
 }
 
-/* ---------- Digital Chapel ---------- */
-.chapel-section {
-  padding: 4.5rem 0;
-  background:
-    linear-gradient(180deg, #f0f4fa 0%, var(--white) 100%);
-}
-
+/* ---------- Chapel (panel content) ---------- */
 .chapel-layout {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 0.95fr 1.05fr;
   gap: 1.5rem;
+  max-width: 980px;
+  margin-inline: auto;
   align-items: start;
 }
 
-.chapel-section .form-card {
-  background: rgba(255, 255, 255, 0.85);
-  position: sticky;
-  top: calc(var(--nav-height) + var(--ticker-height) + 16px);
+#chapel .form-card {
+  margin-inline: 0;
+  max-width: none;
+}
+
+@media (max-width: 960px) {
+  .form-switcher {
+    grid-template-columns: 1fr;
+  }
+
+  .alumni-layout,
+  .chapel-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 .prayer-wall {
@@ -1905,10 +1972,6 @@ textarea {
   .contact-split,
   .placement-layout {
     grid-template-columns: 1fr;
-  }
-
-  .chapel-section .form-card {
-    position: static;
   }
 
   .cards-grid.three-col,
