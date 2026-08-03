@@ -418,8 +418,8 @@ textarea {
   inset: 0;
   z-index: 0;
   background:
-    url("images/hero-students.png") center 35% / cover no-repeat;
-  filter: brightness(1.08) contrast(1.06) saturate(1.05);
+    url("images/hero-students.png") center 28% / cover no-repeat;
+  filter: brightness(1.05) contrast(1.04) saturate(1.03);
   transform: scale(1.02);
   animation: heroKenBurns 24s ease-in-out infinite alternate;
 }
